@@ -1,69 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Drone Delivery Calculator(Web Version) < / title >
-<meta charset = "UTF-8">
-<style>
-body{ font - family: Arial, sans - serif; margin: 20px; }
-label{ display:block; margin - top:10px; }
-button{ margin - top:15px; padding:8px 12px; }
-.result{ margin - top:20px; font - weight:bold; }
-< / style>
-< / head>
+    <title>Drone Delivery Calculator (Web Version)</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 12px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
 <body>
-<h1>Drone Delivery Calculator< / h1>
-<p>Enter the weight(kg) and distance(km) :< / p>
+    <h1>Drone Delivery Calculator</h1>
+    <p>Enter the weight (kg) and distance (km):</p>
 
-<label>Weight(0–5 kg) : <input type = "number" id = "weight" step = "0.1">< / label>
-<label>Distance(0–10 km) : <input type = "number" id = "distance" step = "0.1">< / label>
-<button onclick = "calculate()">Calculate< / button>
+    <label>Weight (0â€“5 kg): <input type="number" id="weight" step="0.1"></label>
+    <label>Distance (0â€“10 km): <input type="number" id="distance" step="0.1"></label>
+    <button onclick="calculate()">Calculate</button>
 
-<div class = "result" id = "output">< / div>
+    <div class="result" id="output"></div>
 
-<script>
-function calculate() {
-    const w = parseFloat(document.getElementById('weight').value);
-    const d = parseFloat(document.getElementById('distance').value);
+    <script>
+    function calculate() {
+      const w = parseFloat(document.getElementById('weight').value);
+      const d = parseFloat(document.getElementById('distance').value);
 
-    if (isNaN(w) || w < 0 || w > 5) {
-        document.getElementById('output').innerText = "Weight error! 0–5 kg only.";
+      if (isNaN(w) || w < 0 || w > 5) {
+        document.getElementById('output').innerText = "Weight error! 0â€“5 kg only.";
         return;
-    }
-    if (isNaN(d) || d < 0 || d > 10) {
-        document.getElementById('output').innerText = "Distance error! 0–10 km only.";
+      }
+      if (isNaN(d) || d < 0 || d > 10) {
+        document.getElementById('output').innerText = "Distance error! 0â€“10 km only.";
         return;
-    }
+      }
 
-    let total = 0;
-    if (w <= 1) {
+      let total = 0;
+      if (w <= 1) {
         if (d <= 3) total = 5;
         else if (d <= 7) total = 8;
         else total = 12;
-    }
-    else if (w <= 3) {
+      } else if (w <= 3) {
         if (d <= 3) total = 8;
         else if (d <= 7) total = 12;
         else total = 16;
-    }
-    else {
+      } else {
         if (d <= 3) total = 12;
         else if (d <= 7) total = 16;
         else total = 20;
+      }
+
+      let time = 0;
+      if (d <= 3) time = 30;
+      else if (d <= 5) time = 40;
+      else if (d <= 7) time = 50;
+      else if (d <= 9) time = 60;
+      else time = 70;
+
+      if (w > 3) time += 5;
+      else if (w > 1) time += 2;
+
+      document.getElementById('output').innerText =
+        `Cost: RM ${total}\nEstimated Time: ${time} mins`;
     }
-
-    let time = 0;
-    if (d <= 3) time = 30;
-    else if (d <= 5) time = 40;
-    else if (d <= 7) time = 50;
-    else if (d <= 9) time = 60;
-    else time = 70;
-
-    if (w > 3) time += 5;
-    else if (w > 1) time += 2;
-
-    document.getElementById('output').innerText =
-        `Cost: RM ${ total }\nEstimated Time : ${ time } mins`;
-}
-< / script>
-< / body>
-< / html>
+    </script>
+</body>
+</html>
